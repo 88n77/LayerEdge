@@ -71,12 +71,13 @@ export PRIVATE_KEY='$PRIV_KEY'
 EOF
 sleep 1
 
-echo -e "${yellow}rzup...${nc}"
+echo -e "${yellow}install rzup...${nc}"
 cd
 source "$HOME/.bashrc"
 rzup install
 
-cd
+rzup --version
+
 sleep 3
 
 echo -e "${yellow}Запуск сервіса Merkle...${nc}"
