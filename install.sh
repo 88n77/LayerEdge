@@ -58,7 +58,7 @@ source "$HOME/.bashrc"
 sleep 5
 rzup install
 
-echo -e "${yellow}Ваш приватний ключ від гаманця 0x:${nc} "
+echo -e "${yellow}Ваш приватний ключ від гаманця:${nc} "
 read PRIV_KEY
 
 cat <<EOF > .env
