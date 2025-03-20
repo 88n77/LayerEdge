@@ -7,10 +7,10 @@ wget https://raw.githubusercontent.com/88n77/Logo-88n77/main/logo.sh
 chmod +x logo.sh
 ./logo.sh
 
-setup_url="https://raw.githubusercontent.com/88n77NODES/Elixir-V3/main/setup_elixir.sh"
-update_url="https://raw.githubusercontent.com/88n77NODES/Elixir-V3/main/Update_elixir.sh"
-start_url=""
-delete_url=""
+setup_url="https://raw.githubusercontent.com/88n77/LayerEdge/main/install.sh"
+start_url="https://raw.githubusercontent.com/88n77/LayerEdge/main/start.sh"
+update_url=""
+delete_url="https://raw.githubusercontent.com/88n77/LayerEdge/main/delet.sh"
 
 menu_options=("Встановити" "Запустити ноду" "Оновити" "Видалити" "Вийти")
 PS3='Оберіть дію: '
