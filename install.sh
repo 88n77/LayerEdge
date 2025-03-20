@@ -69,6 +69,9 @@ export API_REQUEST_TIMEOUT=100
 export POINTS_API=http://127.0.0.1:8080
 export PRIVATE_KEY='$PRIV_KEY'
 EOF
+sleep 1
+cd
+sleep 3
 
 echo -e "${yellow}Запуск сервіса Merkle...${nc}"
 
