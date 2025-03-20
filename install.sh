@@ -71,6 +71,8 @@ export PRIVATE_KEY='$PRIV_KEY'
 EOF
 sleep 1
 
+echo -e "${yellow}rzup...${nc}"
+cd
 source "$HOME/.bashrc"
 rzup install
 
