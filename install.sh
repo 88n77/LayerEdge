@@ -82,6 +82,10 @@ sleep 3
 
 echo -e "${yellow}Запуск сервіса Merkle...${nc}"
 
+sudo apt update
+sudo apt install -y build-essential
+
+
 USERNAME=$(whoami)
 HOME_DIR=$(eval echo ~$USERNAME)
 
