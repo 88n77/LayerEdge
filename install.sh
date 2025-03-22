@@ -7,51 +7,31 @@ nc='\033[0m'
 echo -e "${yellow}Встановлюємо оновлення та залежності...${nc}"
 
 sudo apt update && sudo apt-get upgrade -y
+sudo apt install -y git screen htop curl wget build-essential
 
 git clone https://github.com/Layer-Edge/light-node.git
 cd light-node
 
-LATEST_GO_VERSION="1.23.1"
-
-if ! command -v go &> /dev/null; then
-    echo -e "${yellow}Go встановився. Встановлюємо потрібну версію $LATEST_GO_VERSION...${nc}"
-else
-    INSTALLED_GO_VERSION=$(go version | awk '{print $3}' | cut -d'o' -f2)
-    if [[ "$INSTALLED_GO_VERSION" == "$LATEST_GO_VERSION" ]]; then
-        echo -e "${green}Go актуальні версії $INSTALLED_GO_VERSION.${nc}"
-    else
-        echo -e "${yellow}Оновлення Go до версії $LATEST_GO_VERSION...${nc}"
-    fi
-fi
-
+VER="1.21.3"
 wget "https://golang.org/dl/go$VER.linux-amd64.tar.gz"
 sudo rm -rf /usr/local/go
 sudo tar -C /usr/local -xzf "go$VER.linux-amd64.tar.gz"
 rm "go$VER.linux-amd64.tar.gz"
 [ ! -f ~/.bash_profile ] && touch ~/.bash_profile
- echo "export PATH=$PATH:/usr/local/go/bin:~/go/bin" >> ~/.bash_profile
+echo "export PATH=$PATH:/usr/local/go/bin:~/go/bin" >> ~/.bash_profile
 source $HOME/.bash_profile
 [ ! -d ~/go/bin ] && mkdir -p ~/go/bin
 
-
-INSTALLED_GO_VERSION=$(go version | awk '{print $3}' | cut -d'o' -f2)
-if [[ "$INSTALLED_GO_VERSION" == "$LATEST_GO_VERSION" ]]; then
-    echo -e "${green}Go усіпшно встановлено $INSTALLED_GO_VERSION.${nc}"
-else
-    echo -e "${red}Помилка: Go не оновлений! Версія: $INSTALLED_GO_VERSION.${nc}"
-    exit 1
-fi
-
 if ! command -v rustc &> /dev/null; then
-    echo -e "${yellow}Встановлення Rust через rustup...${nc}"
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-    source $HOME/.cargo/env
-    echo -e "${green}Rust успішно${nc}"
+echo -e "${BLUE}встановлення Rust через rustup...${NC}"
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+source $HOME/.cargo/env
+echo -e "${GREEN}Rust успешно установлен.${NC}"
 else
-    echo -e "${yellow}Rust оновлення${nc}"
-    rustup update
-    source $HOME/.cargo/env
-    echo -e "${green}Rust успішно оновлений...${nc}"
+echo -e "${BLUE}Rust втсановлено... rustup update...${NC}"
+rustup update
+source $HOME/.cargo/env
+echo -e "${GREEN}Rust оновлено.${NC}"
 fi
 
 curl -L https://risczero.com/install | bash
@@ -62,7 +42,6 @@ rzup install
 echo -e "${yellow}Ваш приватний ключ від гаманця:${nc} "
 read PRIV_KEY
 
-cat <<EOF > .env
 echo "GRPC_URL=grpc.testnet.layeredge.io:9090" > .env
 echo "CONTRACT_ADDR=cosmos1ufs3tlq4umljk0qfe8k5ya0x6hpavn897u2cnf9k0en9jr7qarqqt56709" >> .env
 echo "ZK_PROVER_URL=http://127.0.0.1:3001" >> .env
@@ -80,6 +59,13 @@ source "$HOME/.bashrc"
 rzup install
 
 rzup --version
+
+wget https://go.dev/dl/go1.22.3.linux-amd64.tar.gz
+tar -C /usr/local -xzf go1.22.3.linux-amd64.tar.gz
+echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc
+source ~/.bashrc
+go version
+
 
 sleep 3
 
